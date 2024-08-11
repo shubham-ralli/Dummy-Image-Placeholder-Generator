@@ -6,7 +6,6 @@ Create custom placeholder images with various options like dimensions, backgroun
 
 To generate an image with specific dimensions, use the following URL format:
 
-
 ### Examples:
 
 - **Width 600px and Height 400px:**
