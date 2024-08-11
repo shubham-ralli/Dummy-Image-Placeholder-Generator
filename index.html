@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dummy Image Placeholder Generator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding: 20px;
+        }
+        .custom-image {
+            margin-top: 20px;
+            border: 2px solid #ddd;
+            padding: 10px;
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1 class="text-center mb-4">Dummy Image Placeholder Generator</h1>
+    <form id="imageForm">
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label for="width" class="form-label">Width (px)</label>
+                <input type="number" class="form-control" id="width" placeholder="Enter width" required>
+            </div>
+            <div class="col-md-6">
+                <label for="height" class="form-label">Height (px)</label>
+                <input type="number" class="form-control" id="height" placeholder="Enter height">
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label for="bgcolor" class="form-label">Background Color</label>
+                <input type="color" class="form-control" id="bgcolor" value="#ff0000">
+            </div>
+            <div class="col-md-6">
+                <label for="textcolor" class="form-label">Text Color</label>
+                <input type="color" class="form-control" id="textcolor" value="#ffffff">
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="text" class="form-label">Text (Optional)</label>
+            <input type="text" class="form-control" id="text" placeholder="Enter text to display on image">
+        </div>
+        <div class="mb-3">
+            <label for="format" class="form-label">Image Format</label>
+            <select class="form-select" id="format">
+                <option value="jpeg">JPEG</option>
+                <option value="png">PNG</option>
+                <option value="gif">GIF</option>
+                <option value="webp">WEBP</option>
+            </select>
+        </div>
+    </form>
+
+    <div id="imageResult" class="custom-image text-center mt-4">
+        <!-- Placeholder Image will appear here -->
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        function updateImage() {
+            // Get form values
+            const width = $('#width').val() || 600;
+            const height = $('#height').val();
+            const bgcolor = $('#bgcolor').val().substring(1);
+            const textcolor = $('#textcolor').val().substring(1);
+            const text = $('#text').val();
+            const format = $('#format').val();
+
+            let imageUrl = `https://bxcode.com/image/${width}`;
+            if (height) imageUrl += `/${height}`;
+            imageUrl += `?format=${format}`;
+            if (bgcolor) imageUrl += `&bgcolor=${bgcolor}`;
+            if (textcolor) imageUrl += `&textcolor=${textcolor}`;
+            if (text) imageUrl += `&text=${encodeURIComponent(text)}`;
+
+            $('#imageResult').html(`<img src="${imageUrl}" alt="Generated Image" class="img-fluid">`);
+        }
+
+        $('#imageForm input, #imageForm select').on('input change', updateImage);
+        updateImage();
+    });
+</script>
+
+</body>
+</html>
